@@ -1,0 +1,15 @@
+# speicherstadt.app
+
+The website of the Speicherstadt organization: <https://speicherstadt.app/> (German) and
+<https://speicherstadt.app/en/> (English).
+
+Plain HTML and CSS, no build step. GitHub Pages serves this repository as it is; `CNAME` holds the
+custom domain. The projects without a domain of their own (Stellwerk, Fixpunkt) appear below it
+as `/stellwerk/` and `/fixpunkt/`.
+
+- `index.html`, `en/index.html`: the two languages; change both together.
+- `assets/style.css`: colours as variables at the top, light and dark mode.
+- `assets/img/`: project icons and screenshots (960×600 WebP, `-light` and `-dark`), taken from
+  the projects' own repositories.
+- `assets/fonts/`: Inter and Fraunces, SIL Open Font License 1.1, served from this site so no
+  third-party server is contacted.
