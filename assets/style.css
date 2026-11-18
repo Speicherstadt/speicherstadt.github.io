@@ -157,3 +157,12 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
   section { padding-top: 64px; }
 }
 :focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; border-radius: 6px; }
+
+/* Legal pages */
+.hero-slim { min-height: 76px; }
+.legal { max-width: 760px; padding-top: 32px; padding-bottom: 24px; }
+.legal h1 { font-size: clamp(30px, 4.5vw, 42px); margin: 8px 0 24px; font-weight: 600; }
+.legal h2 { font-size: 20px; margin: 32px 0 8px; }
+.legal p, .legal address { margin: 0 0 12px; color: var(--text); font-style: normal; }
+.legal a { color: var(--accent); }
+.legal .note, .legal .updated { color: var(--muted); font-size: 15px; }
