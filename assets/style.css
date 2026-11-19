@@ -167,8 +167,14 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .legal a { color: var(--accent); }
 .legal .note, .legal .updated { color: var(--muted); font-size: 15px; }
 
-/* Support: four tiles as two pairs, contact line below */
-.split.pairs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
-.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 24px 0 0; font-size: 17px; }
-.contact svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
-.contact a { color: var(--accent); font-weight: 600; }
+/* Partner teaser on the home page and the partner page */
+.more { margin: 24px 0 0; }
+.split.pairs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.partner { padding-top: 32px; padding-bottom: 24px; }
+.partner .back { margin: 0 0 28px; font-size: 15px; }
+.partner h1 { margin: 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.1; font-weight: 600; }
+.partner h2 { margin: 48px 0 0; font-size: clamp(22px, 2.6vw, 26px); }
+.partner h2 + p { margin-top: 10px; }
+.partner > p:not(.kicker):not(.back) { max-width: 44em; }
+.partner .split { margin-top: 18px; }
+.partner p a:not(.btn) { color: var(--accent); }
