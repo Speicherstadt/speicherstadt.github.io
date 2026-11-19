@@ -178,3 +178,4 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .partner > p:not(.kicker):not(.back) { max-width: 44em; }
 .partner .split { margin-top: 18px; }
 .partner p a:not(.btn) { color: var(--accent); }
+.partner a[href^="mailto:"] { white-space: nowrap; }
