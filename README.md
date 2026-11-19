@@ -1,13 +1,13 @@
 # speicherstadt.app
 
-The website of the Speicherstadt organization: <https://speicherstadt.app/> (German) and
-<https://speicherstadt.app/en/> (English).
+The website of the Speicherstadt organization: <https://speicherstadt.app/>, in German only.
 
 Plain HTML and CSS, no build step. GitHub Pages serves this repository as it is; `CNAME` holds the
 custom domain. The projects without a domain of their own (Stellwerk, Fixpunkt) appear below it
 as `/stellwerk/` and `/fixpunkt/`.
 
-- `index.html`, `en/index.html`: the two languages; change both together.
+- `index.html`, `partner/`, `datenschutz/`: the pages, in German.
+- `en/`: only redirects from the former English pages to their German ones, so old links keep working.
 - `assets/style.css`: colours as variables at the top, light and dark mode.
 - `assets/img/`: project icons and screenshots (960×600 WebP, `-light` and `-dark`), taken from
   the projects' own repositories.
