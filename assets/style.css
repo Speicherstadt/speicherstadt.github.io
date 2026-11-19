@@ -166,3 +166,9 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .legal p, .legal address { margin: 0 0 12px; color: var(--text); font-style: normal; }
 .legal a { color: var(--accent); }
 .legal .note, .legal .updated { color: var(--muted); font-size: 15px; }
+
+/* Support: four tiles as two pairs, contact line below */
+.split.pairs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 24px 0 0; font-size: 17px; }
+.contact svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
+.contact a { color: var(--accent); font-weight: 600; }
