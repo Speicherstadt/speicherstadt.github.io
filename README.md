@@ -1,7 +1,7 @@
-# speicherstadt.app
+# speicherstadt.org
 
-The website of the Speicherstadt organization: <https://speicherstadt.app/> (German) and
-<https://speicherstadt.app/en/> (English).
+The website of the Speicherstadt organization: <https://speicherstadt.org/> (German) and
+<https://speicherstadt.org/en/> (English).
 
 Plain HTML and CSS, no build step. GitHub Pages serves this repository as it is; `CNAME` holds the
 custom domain. The projects without a domain of their own (Stellwerk, Fixpunkt) appear below it
