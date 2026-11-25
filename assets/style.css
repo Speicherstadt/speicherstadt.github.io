@@ -120,7 +120,11 @@ h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; font-weigh
 .card .links { margin-top: auto; display: flex; gap: 14px; font-size: 14px; color: var(--muted); }
 .card .links a { position: relative; z-index: 1; text-decoration: none; }
 .card .links a:hover { color: var(--accent); text-decoration: underline; }
-.badge { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--accent); border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; }
+.status { white-space: nowrap; font-size: 12px; font-weight: 600; border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; }
+.card-head .status { margin-left: auto; }
+.status.beta { color: var(--copper); }
+.status.dev { color: var(--accent); }
+.legend { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
 
 /* Together / principles */
 .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 32px; }

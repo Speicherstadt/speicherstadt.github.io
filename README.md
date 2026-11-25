@@ -4,8 +4,8 @@ The website of the Speicherstadt organization: <https://speicherstadt.org/> (Ger
 <https://speicherstadt.org/en/> (English).
 
 Plain HTML and CSS, no build step. GitHub Pages serves this repository as it is; `CNAME` holds the
-custom domain. The projects without a domain of their own (Stellwerk, Fixpunkt) appear below it
-as `/stellwerk/` and `/fixpunkt/`.
+custom domain. The projects without a domain of their own (Stellwerk, Fixpunkt, Steuerzentrale) appear below it
+as `/stellwerk/`, `/fixpunkt/` and `/steuerzentrale/`.
 
 - `index.html`, `en/index.html`: the two languages; change both together.
 - `assets/style.css`: colours as variables at the top, light and dark mode.
