@@ -1,7 +1,7 @@
 /* Night sky over the warehouses, drawn with three.js (WebGL).
-   Stars sit on several depth layers and drift slowly westwards, nearer ones faster.
+   Stars sit on several depth layers and stay where they are.
    Some stars fade out and come back elsewhere, a faint Milky Way crosses the sky,
-   and now and then a shooting star falls. Pointer and scroll add a little parallax. */
+   and now and then a shooting star falls. */
 import * as THREE from './vendor/three-r170.module.min.js';
 
 const hero = document.querySelector('.hero');
@@ -25,21 +25,14 @@ function start() {
     uTime: { value: 0 },
     uRes: { value: new THREE.Vector2(1, 1) },
     uPx: { value: 1 },
-    uShift: { value: new THREE.Vector2(0, 0) },   // pointer + scroll parallax, in px
     uHorizon: { value: 0.8 },                     // fraction of the hero where the city begins
   };
 
   const shared = /* glsl */`
-    uniform float uTime; uniform vec2 uRes; uniform float uPx; uniform vec2 uShift; uniform float uHorizon;
+    uniform float uTime; uniform vec2 uRes; uniform float uPx; uniform float uHorizon;
     float hash(float n) { return fract(sin(n) * 43758.5453123); }
-    // place a star: normalized position drifts west with depth, wraps around a field a bit wider than the view
-    vec2 place(vec2 p, float depth, float drift) {
-      float margin = 60.0;
-      float w = uRes.x + 2.0 * margin;
-      float x = mod(p.x * w - uTime * drift * (0.25 + depth) + uShift.x * depth, w) - margin;
-      float y = p.y * uRes.y + uShift.y * depth;
-      return vec2(x, y);
-    }
+    // place a star: fixed in the sky
+    vec2 place(vec2 p) { return p * uRes; }
     // soften the top edge and let the sky thin out towards the haze above the roofs
     float edges(float y) {
       float top = smoothstep(0.0, 28.0, y);
@@ -89,7 +82,7 @@ function start() {
         }
         // scintillation: two beating waves, so it never looks like a metronome
         float tw = 0.62 + 0.38 * sin(uTime * aSeed.y + aSeed.x) * sin(uTime * aSeed.y * 0.37 + aSeed.x * 2.3);
-        vec2 xy = place(p, depth, 6.0);
+        vec2 xy = place(p);
         alpha *= tw * edges(xy.y);
         vColor = aLook.rgb; vAlpha = alpha; vBright = aSeed.w * tw;
         gl_PointSize = aLook.w * uPx * (aSeed.w > 0.5 ? 4.5 : 2.8) * (0.85 + 0.15 * tw);
@@ -134,7 +127,7 @@ function start() {
     vertexShader: shared + /* glsl */`
       attribute vec2 aSeed; varying float vAlpha;
       void main() {
-        vec2 xy = place(position.xy, position.z, 6.0);
+        vec2 xy = place(position.xy);
         vAlpha = (0.1 + 0.3 * aSeed.y) * edges(xy.y);
         gl_PointSize = (1.4 + aSeed.y * 2.2) * uPx;
         gl_Position = projectionMatrix * vec4(xy, 0.0, 1.0);
@@ -216,14 +209,6 @@ function start() {
     if (still) render(40);
   }
 
-  const target = new THREE.Vector2(), shift = new THREE.Vector2();
-  if (!still) {
-    addEventListener('pointermove', (e) => {
-      target.x = (e.clientX / innerWidth - 0.5) * -28;
-      target.y = (e.clientY / innerHeight - 0.5) * -18;
-    }, { passive: true });
-  }
-
   function render(t) {
     uniforms.uTime.value = t;
     renderer.render(scene, camera);
@@ -241,9 +226,6 @@ function start() {
   renderer.setAnimationLoop(() => {
     if (!visible || document.hidden) { clock.getDelta(); return; }
     const t = clock.getElapsedTime();
-    shift.x += (target.x - shift.x) * 0.04;
-    shift.y += (target.y + scrollY * 0.12 - shift.y) * 0.08;
-    uniforms.uShift.value.copy(shift);
     if (!shotState && t > nextShot) { launch(t, W, H); nextShot = t + 8 + Math.random() * 12; }
     updateShot(t);
     render(t + offset);
