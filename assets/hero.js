@@ -1,5 +1,44 @@
 /* Warehouse windows that switch on and off, and their reflections in the canal.
-   The sky itself is drawn by sky.js. */
+   The sky itself is drawn by sky.js. Further down: cards slide in, and the footer greets the dawn. */
+(function () {
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calm || !('IntersectionObserver' in window)) return;
+
+  // cards and principle tiles slide in once, a few at a time
+  var items = [].slice.call(document.querySelectorAll('.card, .tile'));
+  if (items.length) {
+    document.documentElement.classList.add('reveal');
+    var seen = new IntersectionObserver(function (entries) {
+      var batch = 0;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = (batch++ * 90) + 'ms';
+        e.target.classList.add('in');
+        seen.unobserve(e.target);
+        setTimeout(function () { e.target.style.transitionDelay = ''; }, 1600);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { seen.observe(el); });
+  }
+
+  // dawn in the footer: sun rises, the warehouse lights go out one by one
+  var dawn = document.querySelector('.dawn');
+  if (dawn) {
+    var lights = [].slice.call(dawn.querySelectorAll('.dwin'));
+    var started = false;
+    new IntersectionObserver(function (e, obs) {
+      if (!e[0].isIntersecting || started) return;
+      started = true; obs.disconnect();
+      dawn.classList.add('up');
+      lights.sort(function () { return Math.random() - 0.5; });
+      var keep = Math.max(2, Math.round(lights.length * 0.12)); // a few early risers stay lit
+      lights.slice(keep).forEach(function (w, i) {
+        setTimeout(function () { w.classList.add('out'); w.setAttribute('fill', '#3d2120'); }, 900 + i * 260 + Math.random() * 200);
+      });
+    }, { threshold: 0.35 }).observe(dawn);
+  }
+})();
+
 (function () {
   var hero = document.querySelector('.hero');
   var skyline = hero && hero.querySelector('.skyline');
