@@ -99,6 +99,14 @@ a { color: inherit; }
 /* Moon drifts slowly along a flat arc; its reflection follows on the water */
 .skyline .moon { animation: moon 150s ease-in-out infinite alternate; }
 .skyline .moon .halo { animation: halo 9s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.skyline .moon .corona { animation: corona 13s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.skyline .moon .ring { animation: ring 17s ease-in-out infinite; }
+.skyline .moon .shine { animation: shine 6s ease-in-out infinite; }
+.skyline .cloud { animation: cloud 75s linear infinite; animation-delay: 6s; }
+@keyframes corona { 0%, 100% { opacity: .7; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes ring { 0%, 100% { opacity: .04; } 50% { opacity: .14; } }
+@keyframes shine { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+@keyframes cloud { 0% { transform: translateX(-80px); opacity: 0; } 6% { opacity: .85; } 52% { opacity: .85; } 58% { transform: translateX(420px); opacity: 0; } 100% { transform: translateX(420px); opacity: 0; } }
 .skyline .moon-refl { fill: var(--moon); animation: moon-x 150s ease-in-out infinite alternate; }
 .skyline .moon-refl rect { transform-box: fill-box; transform-origin: center; animation: shimmer 3.4s ease-in-out infinite alternate; }
 .skyline .moon-refl rect:nth-child(2n) { animation-duration: 2.7s; animation-delay: -1.3s; }
@@ -106,6 +114,11 @@ a { color: inherit; }
 @keyframes moon { 0% { transform: translate(70px, 14px); } 50% { transform: translate(0, -6px); } 100% { transform: translate(-70px, 14px); } }
 @keyframes moon-x { 0% { transform: translateX(70px); } 50% { transform: translateX(0); } 100% { transform: translateX(-70px); } }
 @keyframes halo { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+
+/* The page meets the canal in a soft wave line */
+.skyline .wave-back { animation: lap 14s ease-in-out infinite alternate; }
+.skyline .wave-front { animation: lap 19s ease-in-out infinite alternate-reverse; }
+@keyframes lap { 0% { transform: translateX(-60px); } 100% { transform: translateX(60px); } }
 
 /* Lit windows mirror into the canal */
 .skyline .refl { fill: var(--lamp); opacity: 0; transition: opacity 1.4s ease; }
@@ -181,7 +194,8 @@ h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; font-weigh
 .story p { margin: 0; font-size: clamp(18px, 2.2vw, 22px); line-height: 1.55; max-width: 44em; }
 @media (max-width: 640px) { .story .wrap { grid-template-columns: 1fr; } .story img { width: 84px; height: 84px; } }
 
-footer { padding: 40px 0 48px; color: var(--muted); font-size: 15px; }
+footer { padding: 0 0 48px; color: var(--muted); font-size: 15px; }
+footer .dawn { margin: clamp(56px, 8vw, 96px) 0 36px; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
 footer a { text-decoration: none; }
 footer a:hover { color: var(--accent); }
@@ -218,3 +232,35 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .partner > p:not(.kicker):not(.back) { max-width: 44em; }
 .partner .split { margin-top: 18px; }
 .partner p a:not(.btn) { color: var(--accent); }
+
+/* Footer: the same warehouses at dawn. Lights go out one after another, the sun comes up. */
+.dawn .sun { transform: translateY(48px); transition: transform 9s cubic-bezier(.2, .6, .2, 1); }
+.dawn .sunpath { opacity: 0; transition: opacity 6s ease 2s; }
+.dawn .sunpath rect { transform-box: fill-box; transform-origin: center; animation: shimmer 3s ease-in-out infinite alternate; }
+.dawn .sunpath rect:nth-child(2n) { animation-duration: 2.3s; animation-delay: -1s; }
+.dawn .dawn-light { transition: opacity 9s ease; }
+.dawn .dwin { transition: fill 1.2s ease, opacity 1.2s ease; }
+.dawn .dwin.out { fill: #3d2120; }
+.dawn .rip { transform-box: fill-box; animation: drift 10s ease-in-out infinite alternate; }
+.dawn .rip:nth-of-type(3n) { animation-duration: 7s; animation-delay: -3s; }
+.dawn .gull { animation: gull 34s linear infinite; }
+.dawn .gull path { transform-box: fill-box; transform-origin: center; animation: flap 1.1s ease-in-out infinite alternate; }
+.dawn .g1 { animation-delay: -1.5s; } .dawn .g1 path { animation-duration: .9s; }
+.dawn .g2 { animation-duration: 46s; animation-delay: -20s; } .dawn .g2 path { animation-duration: 1.3s; }
+.dawn.up .sun { transform: translateY(0); }
+.dawn.up .sunpath { opacity: 1; }
+.dawn.up .dawn-light { opacity: .22; }
+@keyframes gull { 0% { transform: translate(-420px, 6px); } 50% { transform: translate(300px, -8px); } 100% { transform: translate(1100px, 4px); } }
+@keyframes flap { 0% { transform: scaleY(1); } 100% { transform: scaleY(-.35); } }
+
+/* Cards and principles slide in once as they come into view */
+.reveal .card, .reveal .tile { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1), box-shadow .18s ease; }
+.reveal .card.in, .reveal .tile.in { opacity: 1; transform: none; }
+.reveal .card.in:hover { transform: translateY(-3px); transition-delay: 0s !important; }
+.card:hover { box-shadow: var(--shadow), 0 0 0 1px color-mix(in srgb, var(--lamp) 55%, transparent), 0 12px 34px color-mix(in srgb, var(--lamp) 22%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dawn *, .skyline .cloud { animation: none !important; transition: none !important; }
+  .skyline .cloud { opacity: 0; }
+  .dawn .sun { transform: none; } .dawn .sunpath { opacity: 1; }
+}
