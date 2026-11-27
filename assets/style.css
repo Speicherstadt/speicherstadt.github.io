@@ -264,3 +264,7 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
   .skyline .cloud { opacity: 0; }
   .dawn .sun { transform: none; } .dawn .sunpath { opacity: 1; }
 }
+.partner .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.partner ul.steps { max-width: 44em; margin: 12px 0 0; padding-left: 1.2em; }
+.partner ul.steps li { margin: 6px 0; }
+.partner .note { margin-top: 40px; color: var(--muted); font-size: 14px; }
