@@ -11,5 +11,7 @@ as `/stellwerk/`, `/fixpunkt/` and `/steuerzentrale/`.
 - `assets/style.css`: colours as variables at the top, light and dark mode.
 - `assets/img/`: project icons and screenshots (960×600 WebP, `-light` and `-dark`), taken from
   the projects' own repositories.
+- `assets/hero.js`, `assets/sky.js`: the animated night in the hero (windows and reflections; the
+  WebGL sky). `assets/vendor/` holds three.js r170 (MIT), served from this site as well.
 - `assets/fonts/`: Inter and Fraunces, SIL Open Font License 1.1, served from this site so no
   third-party server is contacted.

@@ -100,7 +100,7 @@ a { color: inherit; }
 .skyline .moon { animation: moon 150s ease-in-out infinite alternate; }
 .skyline .moon .halo { animation: halo 9s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .skyline .moon-refl { fill: var(--moon); animation: moon-x 150s ease-in-out infinite alternate; }
-.skyline .moon-refl rect { opacity: .45; transform-box: fill-box; transform-origin: center; animation: shimmer 3.4s ease-in-out infinite alternate; }
+.skyline .moon-refl rect { transform-box: fill-box; transform-origin: center; animation: shimmer 3.4s ease-in-out infinite alternate; }
 .skyline .moon-refl rect:nth-child(2n) { animation-duration: 2.7s; animation-delay: -1.3s; }
 .skyline .moon-refl rect:nth-child(3n) { animation-duration: 4.1s; animation-delay: -.6s; }
 @keyframes moon { 0% { transform: translate(70px, 14px); } 50% { transform: translate(0, -6px); } 100% { transform: translate(-70px, 14px); } }
@@ -111,8 +111,10 @@ a { color: inherit; }
 .skyline .refl { fill: var(--lamp); opacity: 0; transition: opacity 1.4s ease; }
 .skyline .refl.on { opacity: 1; }
 .skyline .refl.tv { fill: #a9c1ef; }
-.skyline .refl rect { opacity: .7; transform-box: fill-box; transform-origin: center; animation: shimmer 3s ease-in-out infinite alternate; }
-.skyline .refl rect + rect { opacity: .45; animation-duration: 2.3s; animation-direction: alternate-reverse; }
+.skyline .refl .gl { animation: glow 7s ease-in-out infinite; }
+.skyline .refl.tv .gl { fill: url(#rgtv); animation: tv 2.6s steps(1) infinite; }
+.skyline .refl rect { transform-box: fill-box; transform-origin: center; animation: shimmer 3s ease-in-out infinite alternate; }
+.skyline .refl rect + rect { animation-duration: 2.3s; animation-direction: alternate-reverse; }
 .skyline .rip { transform-box: fill-box; animation: drift 11s ease-in-out infinite alternate; }
 .skyline .rip:nth-of-type(3n) { animation-duration: 8s; animation-delay: -3s; }
 .skyline .rip:nth-of-type(4n) { animation-duration: 13s; animation-delay: -6s; }
