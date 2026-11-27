@@ -86,13 +86,43 @@ a { color: inherit; }
 .btn-primary:hover { background: #f7d388; }
 .btn-ghost { border: 1px solid rgb(255 255 255 / 25%); color: #f4efe4; }
 .btn-ghost:hover { background: rgb(255 255 255 / 8%); }
-.skyline { display: block; width: 100%; height: auto; margin-top: -10px; }
-.skyline .win { fill: #2a2018; }
+.sky { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.skyline { position: relative; z-index: 1; display: block; width: 100%; height: auto; margin-top: -10px; }
+.skyline .win { fill: #2a2018; transition: fill 1.4s ease; }
 .skyline .win.on { fill: var(--lamp); animation: glow 7s ease-in-out infinite; }
 .skyline .win.on:nth-of-type(3n) { animation-delay: -2.3s; }
 .skyline .win.on:nth-of-type(4n) { animation-delay: -4.1s; }
+.skyline .win.on.tv { fill: #a9c1ef; animation: tv 2.6s steps(1) infinite; }
 @keyframes glow { 0%, 100% { opacity: 1; } 50% { opacity: .78; } }
-@media (prefers-reduced-motion: reduce) { .skyline .win.on { animation: none; } html { scroll-behavior: auto; } }
+@keyframes tv { 0% { opacity: .9; } 13% { opacity: .55; } 21% { opacity: 1; } 38% { opacity: .7; } 52% { opacity: .95; } 66% { opacity: .5; } 79% { opacity: .85; } 90% { opacity: .65; } }
+
+/* Moon drifts slowly along a flat arc; its reflection follows on the water */
+.skyline .moon { animation: moon 150s ease-in-out infinite alternate; }
+.skyline .moon .halo { animation: halo 9s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.skyline .moon-refl { fill: var(--moon); animation: moon-x 150s ease-in-out infinite alternate; }
+.skyline .moon-refl rect { opacity: .45; transform-box: fill-box; transform-origin: center; animation: shimmer 3.4s ease-in-out infinite alternate; }
+.skyline .moon-refl rect:nth-child(2n) { animation-duration: 2.7s; animation-delay: -1.3s; }
+.skyline .moon-refl rect:nth-child(3n) { animation-duration: 4.1s; animation-delay: -.6s; }
+@keyframes moon { 0% { transform: translate(70px, 14px); } 50% { transform: translate(0, -6px); } 100% { transform: translate(-70px, 14px); } }
+@keyframes moon-x { 0% { transform: translateX(70px); } 50% { transform: translateX(0); } 100% { transform: translateX(-70px); } }
+@keyframes halo { 0%, 100% { opacity: .85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+
+/* Lit windows mirror into the canal */
+.skyline .refl { fill: var(--lamp); opacity: 0; transition: opacity 1.4s ease; }
+.skyline .refl.on { opacity: 1; }
+.skyline .refl.tv { fill: #a9c1ef; }
+.skyline .refl rect { opacity: .7; transform-box: fill-box; transform-origin: center; animation: shimmer 3s ease-in-out infinite alternate; }
+.skyline .refl rect + rect { opacity: .45; animation-duration: 2.3s; animation-direction: alternate-reverse; }
+.skyline .rip { transform-box: fill-box; animation: drift 11s ease-in-out infinite alternate; }
+.skyline .rip:nth-of-type(3n) { animation-duration: 8s; animation-delay: -3s; }
+.skyline .rip:nth-of-type(4n) { animation-duration: 13s; animation-delay: -6s; }
+@keyframes shimmer { 0% { transform: translateX(-2.5px) scaleX(.8); } 100% { transform: translateX(2.5px) scaleX(1.15); } }
+@keyframes drift { 0% { transform: translateX(-6px); } 100% { transform: translateX(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .skyline *, .skyline .win.on { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
 
 /* Sections */
 section { padding: 84px 0 0; }
