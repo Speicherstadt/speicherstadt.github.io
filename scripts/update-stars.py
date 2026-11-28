@@ -35,7 +35,7 @@ def main():
             n = cache[repo]
             marker = f"<!--stars:{repo}-->"
             num = f"{n:,}".replace(",", sep)
-            return (f'{marker}<a class="stars" href="https://github.com/Speicherstadt/{repo}/stargazers" '
+            return (f'{marker}<a class="stars" href="https://github.com/Speicherstadt/{repo}/stargazers" target="_blank" rel="noopener" '
                     f'title="{num} {label}" aria-label="{num} {label}">{STAR}{num}</a>')
 
         new = MARKER.sub(fill, html)
