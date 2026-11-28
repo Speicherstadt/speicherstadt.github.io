@@ -167,10 +167,11 @@ h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; font-weigh
 .card .links a:hover { color: var(--accent); text-decoration: underline; }
 .card .links { flex-wrap: wrap; align-items: center; }
 .card .links a { white-space: nowrap; }
-.card .links a.book { color: var(--copper); font-weight: 600; font-size: 13px; border: 1px solid currentColor; border-radius: 999px; padding: 2px 10px; order: 3; margin-left: auto; }
+.card .links a.book { color: var(--copper); font-weight: 600; font-size: 13px; border: 1px solid currentColor; border-radius: 999px; padding: 2px 10px; margin-left: auto; }
 .card .links a.book:hover { color: var(--copper); text-decoration: none; background: color-mix(in srgb, currentColor 12%, transparent); }
 .status { white-space: nowrap; font-size: 12px; font-weight: 600; border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; }
-.card-head .status { margin-left: auto; }
+.card .links .status { margin-left: auto; }
+.card .links .book + .status { margin-left: 0; }
 .status.beta { color: var(--copper); }
 .status.dev { color: var(--accent); }
 .legend { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
@@ -268,3 +269,10 @@ footer nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .partner ul.steps { max-width: 44em; margin: 12px 0 0; padding-left: 1.2em; }
 .partner ul.steps li { margin: 6px 0; }
 .partner .note { margin-top: 40px; color: var(--muted); font-size: 14px; }
+/* GitHub stars over the screenshot, written daily by scripts/update-stars.py */
+.card .stars { position: absolute; top: 10px; right: 10px; z-index: 1; display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px 3px 8px; border-radius: 999px; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums;
+  color: #fff; text-decoration: none; background: rgb(15 18 26 / .62); border: 1px solid rgb(255 255 255 / .14);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 2px 8px rgb(0 0 0 / .25); transition: background .15s; }
+.card .stars svg { color: #f5c451; }
+.card .stars:hover { background: rgb(15 18 26 / .8); }
