@@ -2,12 +2,10 @@
 """Show current GitHub star counts as a pill over each app card's screenshot.
 
 Run daily by .github/workflows/stars.yml. Each card carries a marker comment
-<!--stars:REPO--> followed by the pill this script writes. Counts below
-MIN_STARS are left out, so a young project shows no pill until it gets there.
+<!--stars:REPO--> followed by the pill this script writes.
 """
 import json, os, re, urllib.request
 
-MIN_STARS = 10
 STAR = ('<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
         '<path fill="currentColor" d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg>')
 PAGES = {"index.html": ("Sterne auf GitHub", "."), "en/index.html": ("stars on GitHub", ",")}
@@ -36,8 +34,6 @@ def main():
                 cache[repo] = stars(repo)
             n = cache[repo]
             marker = f"<!--stars:{repo}-->"
-            if n < MIN_STARS:
-                return marker
             num = f"{n:,}".replace(",", sep)
             return (f'{marker}<a class="stars" href="https://github.com/Speicherstadt/{repo}/stargazers" '
                     f'title="{num} {label}" aria-label="{num} {label}">{STAR}{num}</a>')
